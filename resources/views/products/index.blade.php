@@ -1,4 +1,4 @@
-@extends('layouts')
+@extends('products.layouts')
 
 @section('content')
 
@@ -43,7 +43,7 @@
 
                                     <a href="{{ route('products.edit', $product->id) }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i> Edit</a>   
 
-                                    <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash" onclick="return confirm('Do you want to delete this product?');"></i> Delete</button>
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete this product?')">Delete</button>
                                 </form>
                             </td>
                         </tr>

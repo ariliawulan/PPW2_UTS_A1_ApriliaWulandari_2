@@ -17,7 +17,7 @@ class ProductController extends Controller
     {
         $products = Product::latest()->paginate(3);
 
-        return view('products\index', ['products' => $products]);
+        return view('products.index', ['products' => $products]);
     }
 
     /**
@@ -34,7 +34,7 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request) : RedirectResponse
     {
         Product::create($request->all());
-        return redirect()->route('index')
+        return redirect()->route('products.index')
                 ->with(['success' => 'New product is added successfully.']);
     }
 
@@ -43,8 +43,9 @@ class ProductController extends Controller
      */
     public function show(Product $product) : View
     {
+        Product::all();
         return view('products.show', [
-            'products' => $product
+            'product' => $product
         ]);
     }
 
@@ -54,7 +55,7 @@ class ProductController extends Controller
     public function edit(Product $product) : View
     {
         return view('products.edit', [
-            'products' => $product
+            'product' => $product
         ]);
     }
 
@@ -72,9 +73,10 @@ class ProductController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy($product) : RedirectResponse
-    {
+    {   
+        $product = Product::findOrFail($product);
         $product->delete();
-        return redirect()->route('produtcs.index')
+        return redirect()->route('products.index')
                 ->with(['success' => 'Product is deleted successfully.']);
     }
 }
